@@ -281,6 +281,7 @@
     <Content Include="Views\OrdersAdmin\StockTransaction.cshtml" />
     <Content Include="Views\Home\ViewPage1.cshtml" />
     <Content Include="Views\ProductsView\Index.cshtml" />
+    <Content Include="Views\Orders\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
