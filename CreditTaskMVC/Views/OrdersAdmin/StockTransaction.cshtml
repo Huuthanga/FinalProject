@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FinalProject.Models.StockTransaction>
+@{
+    ViewBag.Title = "Stock Report";
+}
+
+<h2>Stock Report</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transaction_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transaction_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.transaction_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.transaction_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+        </tr>
+    }
+
+</table>
+<button onclick="window.print()">Print Page</button>

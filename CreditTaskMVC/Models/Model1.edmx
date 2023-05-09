@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FinalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="agent_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="agent_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="agent_contact_person" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="agent_address" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="agent_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="agent_phone" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="reseller_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="agent_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="order_date" Type="date" Nullable="false" />
+          <Property Name="product_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="status_payment" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="product_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="product_brand" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="product_model" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="product_description" Type="text" />
+          <Property Name="product_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="product_quantity" Type="int" Nullable="false" />
+          <Property Name="product_image" Type="varchar" MaxLength="255" />
+          <Property Name="product_date_added" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reseller">
+          <Key>
+            <PropertyRef Name="reseller_id" />
+          </Key>
+          <Property Name="reseller_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="reseller_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="reseller_contact_person" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="reseller_address" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="reseller_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="reseller_phone" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Orders__agent_id__3C69FB99">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__reseller__3B75D760">
+          <End Role="Reseller" Type="Self.Reseller" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reseller">
+              <PropertyRef Name="reseller_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="reseller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinalDBModelStoreContainer">
+          <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reseller" EntityType="Self.Reseller" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Orders__agent_id__3C69FB99" Association="Self.FK__Orders__agent_id__3C69FB99">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__reseller__3B75D760" Association="Self.FK__Orders__reseller__3B75D760">
+            <End Role="Reseller" EntitySet="Reseller" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="agent_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent_contact_person" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent_phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__agent_id__3C69FB99" FromRole="Agents" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reseller_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="agent_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="status_payment" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK__Orders__agent_id__3C69FB99" FromRole="Orders" ToRole="Agents" />
+          <NavigationProperty Name="Reseller" Relationship="Self.FK__Orders__reseller__3B75D760" FromRole="Orders" ToRole="Reseller" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="product_brand" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="product_model" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="product_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="product_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="product_quantity" Type="Int32" Nullable="false" />
+          <Property Name="product_image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="product_date_added" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Reseller">
+          <Key>
+            <PropertyRef Name="reseller_id" />
+          </Key>
+          <Property Name="reseller_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reseller_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reseller_contact_person" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reseller_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reseller_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reseller_phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__reseller__3B75D760" FromRole="Reseller" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK__Orders__agent_id__3C69FB99">
+          <End Role="Agents" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__reseller__3B75D760">
+          <End Role="Reseller" Type="Self.Reseller" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reseller">
+              <PropertyRef Name="reseller_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="reseller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Resellers" EntityType="Self.Reseller" />
+          <AssociationSet Name="FK__Orders__agent_id__3C69FB99" Association="Self.FK__Orders__agent_id__3C69FB99">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__reseller__3B75D760" Association="Self.FK__Orders__reseller__3B75D760">
+            <End Role="Reseller" EntitySet="Resellers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinalDBModelStoreContainer" CdmEntityContainer="FinalDBEntities">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="FinalDBModel.Agent">
+              <MappingFragment StoreEntitySet="Agents">
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="agent_name" ColumnName="agent_name" />
+                <ScalarProperty Name="agent_contact_person" ColumnName="agent_contact_person" />
+                <ScalarProperty Name="agent_address" ColumnName="agent_address" />
+                <ScalarProperty Name="agent_email" ColumnName="agent_email" />
+                <ScalarProperty Name="agent_phone" ColumnName="agent_phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FinalDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="reseller_id" ColumnName="reseller_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status_payment" ColumnName="status_payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FinalDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_brand" ColumnName="product_brand" />
+                <ScalarProperty Name="product_model" ColumnName="product_model" />
+                <ScalarProperty Name="product_description" ColumnName="product_description" />
+                <ScalarProperty Name="product_price" ColumnName="product_price" />
+                <ScalarProperty Name="product_quantity" ColumnName="product_quantity" />
+                <ScalarProperty Name="product_image" ColumnName="product_image" />
+                <ScalarProperty Name="product_date_added" ColumnName="product_date_added" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resellers">
+            <EntityTypeMapping TypeName="FinalDBModel.Reseller">
+              <MappingFragment StoreEntitySet="Reseller">
+                <ScalarProperty Name="reseller_id" ColumnName="reseller_id" />
+                <ScalarProperty Name="reseller_name" ColumnName="reseller_name" />
+                <ScalarProperty Name="reseller_contact_person" ColumnName="reseller_contact_person" />
+                <ScalarProperty Name="reseller_address" ColumnName="reseller_address" />
+                <ScalarProperty Name="reseller_email" ColumnName="reseller_email" />
+                <ScalarProperty Name="reseller_phone" ColumnName="reseller_phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

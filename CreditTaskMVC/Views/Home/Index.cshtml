@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<body>
+    <header>
+        <h1>Welcome to reseller/agents</h1>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Make order/check order", "Index", "Orders")</li>
+                <li>@Html.ActionLink("Check Product", "Index", "ProductsView")</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>
+               <div>Nguyen Huu Thang</div>
+            </p>
+        </section>
+
+        <section>
+            <h2> Acknowledgement</h2>
+            <p>
+                I would like to thank the teachers of Ton Duc Thang University in Ho Chi Minh City, as
+                well as the teachers of the Department of Software Engineering FOR IT for their enthusiastic guidance during my time studying at the
+                school; Special thanks to Mr. Trung who directly guided me to complete my
+                graduation thesis. Besides, I would also like to thank all the friends of the 21k50201
+                class, friends, and brothers and sisters who have accompanied and encouraged me
+                during the past time.
+                Above all, I would like to thank my parents for their dedication to nurturing and
+                teaching; always support, care for me, give me peace of mind to study.
+                I sincerely thank!
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright © 2023 My Website</p>
+    </footer>
+</body>
